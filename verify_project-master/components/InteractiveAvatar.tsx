@@ -4,6 +4,7 @@ import StreamingAvatar, {
   StreamingEvents,
   TaskMode,
   TaskType,
+  VoiceEmotion
 } from "@heygen/streaming-avatar";
 import {
   Button,
@@ -91,7 +92,7 @@ export default function InteractiveAvatar() {
         knowledgeId: knowledgeId,
         voice: {
           rate: 1.5, // Speech rate
-          emotion: "excited", // Voice emotion
+          emotion: VoiceEmotion.EXCITED, // Voice emotion
         },
         language: language,
         disableIdleTimeout: true,

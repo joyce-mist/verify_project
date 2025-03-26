@@ -4,6 +4,7 @@ import StreamingAvatar, {
   StreamingEvents,
   TaskMode,
   TaskType,
+  VoiceEmotion
 } from "@heygen/streaming-avatar";
 import {
   Button,
@@ -91,7 +92,7 @@ export default function InteractiveAvatar() {
         knowledgeId: knowledgeId,
         voice: {
           rate: 1.5, // Speech rate
-          emotion: "excited", // Voice emotion
+          emotion: VoiceEmotion.EXCITED, // Voice emotion
         },
         language: language,
         disableIdleTimeout: true,
@@ -112,12 +113,34 @@ export default function InteractiveAvatar() {
       setDebug("Avatar API not initialized");
       return;
     }
+    
     await avatar.current
-      .speak({ text: text, taskType: TaskType.REPEAT, taskMode: TaskMode.SYNC })
+      .speak({ text: EvaSpeaks(text), taskType: TaskType.REPEAT, taskMode: TaskMode.SYNC })
       .catch((e) => {
         setDebug(e.message);
       });
     setIsLoadingRepeat(false);
+  }
+
+  //Calls Eva's talk endpoint
+  function EvaSpeaks(userInput:String)
+  {
+  /*  const formData = new FormData();
+           
+    formData.append('sessionId', "@Model.UserId");
+    formData.append('userInput', messageText);
+   
+    fetch('/api/talk', {
+        method: 'POST',
+        body: formData
+          })
+        .then(response => {
+          return response.text(); 
+        })
+        .then(data => { addMessage(data,"bot"); })
+        .catch(error => console.error('Error:', error))
+            .finally(() => { typingIndicator.classList.remove("active") });*/
+    return "Hi i am Eva's response"
   }
 
   // Interrupt the avatar's current task
